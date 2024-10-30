@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VWoW Clases</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        .esconde {
+            display: none; /* Asegúrate de que esta clase está definida */
+        }
+    </style>
+</head>
+
+<body class="text-bg-dark bg-opacity-75">
+    <div class="collapse text-bg-info bg-opacity-75" id="navbarHeader">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-7 py-4">
+                    <h4>WORLD OF WARCRAFT</h4>
+                    <p class="text-light">
+                        World of Warcraft (WoW) es un MMORPG creado por Blizzard Entertainment, ambientado en el vasto mundo de Azeroth, donde los jugadores eligen razas y clases para unirse a la Alianza o la Horda en una épica aventura. Los personajes avanzan a través de misiones, combates y exploración en un universo detallado y lleno de historia. El juego se destaca por su experiencia social y cooperativa en gremios, mazmorras y raids, así como en sus combates competitivos PvP. A lo largo de sus expansiones, WoW ha mantenido su relevancia en la cultura gamer, ofreciendo siempre nuevos desafíos y contenido.</p>
+                </div>
+                <div class="col-sm-4 offset-md-1 py-4">
+                    <h4>Contáctame</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="https://www.instagram.com/warcraft/?hl=es" target="_blank" class="text-light">Follow on Instagram</a></li>
+                        <li><a href="https://worldofwarcraft.blizzard.com/es-es/" class="text-light">Descubre más</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-info bg-info shadow-sm">
+        <div class="container">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-moon me-2" viewBox="0 0 16 16">
+                    <path
+                        d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286" />
+                </svg>
+                <strong>Album</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+                aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+
+    <header class="container">
+        <h1 class="display-1 my-4"> </h1>
+        <select class="form-select my-4">
+            <option value="todos">Todas las clases</option>
+            <option value="dps">Daño</option>
+            <option value="tanque">Tanque</option>
+            <option value="sanador">Sanador</option>
+        </select>
+    </header>
+
+    <div class="container text-center">
+        <main class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-2 g-lg-3"></main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        const nombre = "CLASES JUGABLES";
+        const autoria = document.querySelector("h1");
+        autoria.innerHTML = nombre;
+
+        const principal = document.querySelector("main");
+        const seleccion = document.querySelector("select");
+
+        async function astros() {
+            const consulta = await fetch("https://raw.githubusercontent.com/Mister-Worldwide/Evaluacion3/main/datos.json");
+            const data = await consulta.json();
+            console.log(data);
+
+            data.forEach((d, i) => {
+                principal.innerHTML +=
+                    `<div class="trabajo ${d.signo} col shadow-sm mb-3">
+                        <div class="card text-bg-info shadow-sm">
+                            <img src="${d.foto}" class="card-img-top" alt="${d.fecha}">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <a href="single.html?data=${i}" class="link-light
+                                        link-offset-2 link-offset-3-hover 
+                                        link-underline link-underline-opacity-0
+                                        link-underline-opacity-75-hover stretched-link">${d.nombre}</a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-body-secondary">${d.signo}</small>
+                                        <small class="text-body-secondary">${d.fecha}</small>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+
+            seleccionables();
+        }
+
+        astros().catch((error) => console.error(error));
+
+        function seleccionables() {
+            seleccion.addEventListener("change", (e) => {
+                const valor = e.target.value;
+                console.log(`Seleccionado: ${valor}`);
+
+                document.querySelectorAll(".trabajo").forEach((card) => {
+                    if (valor === "todos" || card.classList.contains(valor)) {
+                        card.classList.remove("esconde");
+                    } else {
+                        card.classList.add("esconde");
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
+
